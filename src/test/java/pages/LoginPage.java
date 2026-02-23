@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
 
@@ -32,11 +33,21 @@ public void Signin(){
 
 
     public boolean isDashboardDisplayed() {
-        return driver.getCurrentUrl().contains("dashboard");
+        try {
+            wait.until(ExpectedConditions.urlContains("dashboard"));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public String getErrorMessage() {
-        return driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText();
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage));
+            return driver.findElement(errorMessage).getText();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
 
