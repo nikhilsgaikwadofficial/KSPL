@@ -35,18 +35,6 @@
         <version>RELEASE</version>
         <scope>test</scope>
       </dependency>
-      <dependency>
-        <groupId>com.aventstack</groupId>
-        <artifactId>extentreports</artifactId>
-        <version>5.1.2</version>
-      </dependency>
-      <!-- Override ExtentReports' transitive Lombok - required for Java 17+ / Java 24 compatibility -->
-      <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>1.18.38</version>
-        <scope>provided</scope>
-      </dependency>
   </dependencies>
 
   <build>
@@ -69,6 +57,11 @@
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.3.0</version>
+          <configuration>
+            <suiteXmlFiles>
+              <suiteXmlFile>testng.xml</suiteXmlFile>
+            </suiteXmlFiles>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
